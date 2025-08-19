@@ -1,0 +1,8 @@
+###RAIZZZZZZ
+GET http://localhost:5271/endereco
+
+###ENDERECO
+GET http://localhost:5271/endereco
+
+###
+POST http://localhost:5271/endereco
