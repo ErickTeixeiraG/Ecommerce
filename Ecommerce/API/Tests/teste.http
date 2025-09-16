@@ -1,8 +1,15 @@
 ###RAIZZZZZZ
-GET http://localhost:5271/endereco
+GET http://localhost:5271/
 
-###ENDERECO
-GET http://localhost:5271/endereco
+###LISTA
+GET http://localhost:5271/api/produto/listar
 
-###
-POST http://localhost:5271/endereco
+###CRIAR
+POST http://localhost:5271/api/produto/cadastrar
+Content-Type: application/json
+
+{
+    "nome" : "Vassoura",
+    "quantidade": 3,
+    "preco": 57.75
+} 
