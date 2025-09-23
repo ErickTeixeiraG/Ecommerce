@@ -4,6 +4,9 @@ GET http://localhost:5271/
 ###LISTA
 GET http://localhost:5271/api/produto/listar
 
+### BUCAR PRODUTO POR NOME
+GET http://localhost:5271/api/produto/buscar/Vassoura
+
 ###CRIAR
 POST http://localhost:5271/api/produto/cadastrar
 Content-Type: application/json
