@@ -16,3 +16,16 @@ Content-Type: application/json
     "quantidade": 3,
     "preco": 57.75
 } 
+
+###ATUALIZAR
+PATCH http://localhost:5271/api/produto/alterar/0b0e3df6-731f-4d0e-b8a6-fdcc77c4202f
+Content-Type: application/json
+
+{
+    "nome" : "VassouraA",
+    "quantidade": 33,
+    "preco": 58.75
+} 
+
+###DELETAR
+DELETE http://localhost:5271/api/produto/deletar/0b0e3df6-731f-4d0e-b8a6-fdcc77c4202f

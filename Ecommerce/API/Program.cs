@@ -1,4 +1,5 @@
 using API.Models;
+using Microsoft.AspNetCore.Mvc;
 Console.Clear();
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,30 @@ app.MapGet("/api/produto/listar", () =>
     return Results.NotFound("Lista vazia");
 });
 
+
+app.MapDelete("/api/produto/deletar/{id}", ([FromRoute]string id) =>
+{
+    Produto? resultado = produtos.FirstOrDefault(x => x.Id == id);
+    if (resultado is null)
+    {
+        return Results.NotFound("Produto não localizado");
+    }
+    produtos.Remove(resultado);
+    return Results.Ok(resultado);
+});
+
+app.MapPatch("/api/produto/alterar/{id}", ([FromRoute]string id, [FromBody]Produto produtoAtualizado) =>
+{
+    Produto? resultado = produtos.FirstOrDefault(p => p.Id == id);
+    if (resultado is null)
+    {
+        return Results.NotFound("Produto não encontrado para alteração.");
+    }
+    resultado.Nome = produtoAtualizado.Nome;
+    resultado.Quantidade = produtoAtualizado.Quantidade;
+    resultado.Preco = produtoAtualizado.Preco;
+    return Results.Ok(resultado);
+});
 
 app.MapGet("/api/produto/buscar/{nome_do_produto}", (string nome_do_produto) =>
 {
