@@ -18,7 +18,7 @@ Content-Type: application/json
 } 
 
 ###ATUALIZAR
-PATCH http://localhost:5271/api/produto/alterar/0b0e3df6-731f-4d0e-b8a6-fdcc77c4202f
+PATCH http://localhost:5271/api/produto/alterar/2e1c28fb-5613-46bf-8c7f-535227c425a0
 Content-Type: application/json
 
 {
@@ -28,4 +28,4 @@ Content-Type: application/json
 } 
 
 ###DELETAR
-DELETE http://localhost:5271/api/produto/deletar/0b0e3df6-731f-4d0e-b8a6-fdcc77c4202f
+DELETE http://localhost:5271/api/produto/deletar/dd656662-2160-4a40-a3d0-27e93b457384
