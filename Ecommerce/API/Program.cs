@@ -4,6 +4,10 @@ Console.Clear();
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDataContext>();
+builder.Services.AddCors(
+    options => options.AddPolicy("Acesso total",
+    configs => configs.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod())
+);
 var app = builder.Build();
 
     var produtos = new List<Produto>
@@ -81,6 +85,7 @@ app.MapPost("/api/produto/cadastrar", ([FromBody]Produto produto, [FromServices]
     return Results.Conflict("Esse produto já foi cadastrado");
 });
 
+app.UseCors("Acesso total");
 app.Run();
 
 
