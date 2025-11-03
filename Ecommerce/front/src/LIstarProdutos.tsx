@@ -1,6 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+interface Produto {
+    id: string;
+    nome: string;
+    quantidade: number;
+    preco: number;
+    criadoEm: string;
+}
 
 function ListarProdutos(){
+
+    const [produtos, setProdutos] = useState<Produto[]>([]);
+
     useEffect(() => {
         
         buscarProdutosAPI();
@@ -15,7 +26,8 @@ async function buscarProdutosAPI(){
             throw new Error("Requisição com problema: "+ resposta.statusText);
         }
         const dados = await resposta.json();
-        console.table(dados);
+
+        setProdutos(dados);
     } catch (error) {
         console.log("Requisição com erro: "+ error);
     }
@@ -26,8 +38,29 @@ async function buscarProdutosAPI(){
     return(
         <div id="listar_produtos">
             <h1>Listar produtos</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Quantidade</th>
+                        <th>Preço</th>
+                        <th>Criado em</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {produtos.map((produto) => (
+                        <tr key={produto.id}>
+                            <td>{produto.id}</td>
+                            <td>{produto.nome}</td>
+                            <td>{produto.quantidade}</td>
+                            <td>{produto.preco}</td>
+                            <td>{new Date(produto.criadoEm).toLocaleDateString()}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
-        
     );
 }
 export default ListarProdutos;
