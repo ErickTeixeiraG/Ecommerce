@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
-
-interface Produto {
-    id: string;
-    nome: string;
-    quantidade: number;
-    preco: number;
-    criadoEm: string;
-}
+import Produto from "./models/Produto";
+import axios from "axios";
 
 function ListarProdutos(){
 
@@ -21,12 +15,8 @@ function ListarProdutos(){
 async function buscarProdutosAPI(){
 
     try {
-        const resposta = await fetch("http://localhost:5271/api/produto/listar")
-        if(!resposta.ok){
-            throw new Error("Requisição com problema: "+ resposta.statusText);
-        }
-        const dados = await resposta.json();
-
+        const resposta = await axios.get("http://localhost:5271/api/produto/listar");
+        const dados = resposta.data;
         setProdutos(dados);
     } catch (error) {
         console.log("Requisição com erro: "+ error);
@@ -55,7 +45,7 @@ async function buscarProdutosAPI(){
                             <td>{produto.nome}</td>
                             <td>{produto.quantidade}</td>
                             <td>{produto.preco}</td>
-                            <td>{new Date(produto.criadoEm).toLocaleDateString()}</td>
+                            <td>{produto.criadoEm}</td>
                         </tr>
                     ))}
                 </tbody>
