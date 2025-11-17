@@ -63,9 +63,9 @@ app.MapPatch("/api/produto/alterar/{id}", ([FromRoute]string id, [FromBody]Produ
     return Results.Ok(resultado);
 });
 
-app.MapGet("/api/produto/buscar/{nome_do_produto}", (string nome_do_produto, [FromServices] AppDataContext ctx) =>
+app.MapGet("/api/produto/buscar/{id}", ([FromRoute]string id, [FromServices] AppDataContext ctx) =>
 {
-    Produto? resultado = ctx.Produtos.FirstOrDefault(x => x.Nome == nome_do_produto);
+    Produto? resultado = ctx.Produtos.Find(id);
     if (resultado is null)
     {
         return Results.NotFound("Produto não localizado");

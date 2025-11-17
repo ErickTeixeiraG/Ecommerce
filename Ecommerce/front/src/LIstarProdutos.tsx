@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Produto from "./models/Produto";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function ListarProdutos(){
 
@@ -25,6 +26,20 @@ async function buscarProdutosAPI(){
     
 }
 
+function deletarProduto(id:string){
+    deletarProdutoAPI(id);
+}
+
+async function deletarProdutoAPI(id:string){
+    try {
+        const resposta = await axios.delete(`http://localhost:5271/api/produto/deletar/${id}`);
+        buscarProdutosAPI();
+        console.log(resposta.data);
+    } catch (error) {
+        console.log(error)
+    }
+}
+
     return(
         <div id="listar_produtos">
             <h1>Listar produtos</h1>
@@ -36,6 +51,8 @@ async function buscarProdutosAPI(){
                         <th>Quantidade</th>
                         <th>Preço</th>
                         <th>Criado em</th>
+                        <th>Deletar</th>
+                        <th>Atualizar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,6 +63,12 @@ async function buscarProdutosAPI(){
                             <td>{produto.quantidade}</td>
                             <td>{produto.preco}</td>
                             <td>{produto.criadoEm}</td>
+                            <td>
+                                <button onClick={() => deletarProduto(produto.id!)}>Deletar</button>
+                            </td>
+                            <td>
+                                <Link to={`/produto/alterar/${produto.id}`}>Alterar</Link>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

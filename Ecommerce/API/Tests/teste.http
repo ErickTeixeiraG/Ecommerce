@@ -4,8 +4,8 @@ GET http://localhost:5271/
 ###LISTA
 GET http://localhost:5271/api/produto/listar
 
-### BUCAR PRODUTO POR NOME
-GET http://localhost:5271/api/produto/buscar/Vassoura
+### BUCAR PRODUTO POR ID
+GET http://localhost:5271/api/produto/buscar/2e1c28fb-5613-46bf-8c7f-535227c425a0
 
 ###CRIAR
 POST http://localhost:5271/api/produto/cadastrar
